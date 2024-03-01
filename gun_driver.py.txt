@@ -1,0 +1,27 @@
+from time import sleep
+
+from machine import Pin
+
+from machine import PWM
+
+pwm = PWM(Pin(0))
+
+pwm.freq(50)
+
+def shootAt(theta, x, y):
+    # move from current position to specific position slowly.
+    pwm.duty_u16(theta)
+    
+    print('val', theta)
+    
+    sleep(0.1)
+    
+    
+
+
+    
+    
+    
+        
+
+

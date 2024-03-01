@@ -1,0 +1,39 @@
+from time import sleep
+from machine import Pin
+from machine import PWM
+from gun_driver import shootAt
+from ultra_sonic import ultra
+import utime
+
+        
+
+pwm = PWM(Pin(15))
+pwm.freq(50)
+
+
+
+def gunActivator(theta):
+        # call radar ultra fxn
+        dist = ultra()
+        if(dist != -1):
+            
+        # make call to gun control fxn with (theta,x, y) 3-dimensional co-ordinates
+        
+            shootAt(theta, dist, 2)
+#             print(dist)
+            
+        else:
+            print("Target out of range !!")
+
+while True:
+    for position in range(1000,5000,50):
+        pwm.duty_u16(position)
+        gunActivator(position)
+        sleep(0.01)
+        
+    for position in range(5000,1000,-50):
+        pwm.duty_u16(position)
+        gunActivator(position)
+        sleep(0.01)
+
+
